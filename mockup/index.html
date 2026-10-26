@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coloc – maquette</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+<header class="top">
+  <div class="brand">la<span>coloc</span></div>
+  <div class="me"><a class="link" href="#pin">Mon PIN</a><a class="link" href="#login">Déconnexion</a><span class="av c-flav">F</span></div>
+</header>
+
+<main>
+
+<!-- ============ CONNEXION ============ -->
+<section class="view" id="v-login">
+  <div class="auth">
+    <div class="brand" style="font-size:28px;text-align:center">la<span>coloc</span></div>
+    <p class="sub" style="text-align:center;margin-top:6px">Qui es-tu ?</p>
+    <div class="who">
+      <button class="who-btn sel"><span class="av lg c-flav">F</span>Flav</button>
+      <button class="who-btn"><span class="av lg c-lea">L</span>Léa</button>
+      <button class="who-btn"><span class="av lg c-hugo">H</span>Hugo</button>
+      <button class="who-btn"><span class="av lg c-ines">I</span>Inès</button>
+      <button class="who-btn"><span class="av lg c-tom">T</span>Tom</button>
+    </div>
+    <label class="field">Ton PIN<input type="password" inputmode="numeric" placeholder="••••" maxlength="6"></label>
+    <p class="muted" style="margin-top:8px">Trop d'erreurs : accès bloqué 15 minutes.</p>
+    <a class="btn primary block" href="#pin">Se connecter</a>
+  </div>
+</section>
+
+<!-- ============ CHOISIR / CHANGER SON PIN ============ -->
+<section class="view" id="v-pin">
+  <div class="auth">
+    <h1 style="text-align:center">Choisis ton PIN 🔐</h1>
+    <p class="sub" style="text-align:center">C'est ta première connexion : remplace le PIN temporaire par le tien (4 à 6 chiffres).</p>
+    <label class="field">PIN temporaire<input type="password" inputmode="numeric" maxlength="6" placeholder="••••"></label>
+    <label class="field">Nouveau PIN<input type="password" inputmode="numeric" maxlength="6" placeholder="••••"></label>
+    <label class="field">Confirmer le nouveau PIN<input type="password" inputmode="numeric" maxlength="6" placeholder="••••"></label>
+    <a class="btn primary block" href="#home">Valider</a>
+  </div>
+</section>
+
+<!-- ============ ACCUEIL (calendrier + évènements) ============ -->
+<section class="view" id="v-home">
+  <h1>Salut Flav 👋</h1>
+  <p class="sub">Tout ce que les autres doivent savoir · lundi 26 octobre</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="cal-head"><button class="btn">←</button><h2>octobre 2026</h2><button class="btn">→</button></div>
+      <div class="cal-grid" id="cal"></div>
+      <div class="legend">
+        <span><i style="background:var(--c-ines)"></i>Soirée</span>
+        <span><i style="background:var(--ok)"></i>Dîner</span>
+        <span><i style="background:var(--c-hugo)"></i>Invité</span>
+        <span><i style="background:var(--muted)"></i>Absence</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Évènements à venir</h2>
+      <div class="ev">
+        <div class="date-badge"><b>27</b><small>mar</small></div>
+        <div class="grow"><h3>Dîner raclette</h3><div class="ev-meta">20h · par Tom</div>
+          <div class="row wrap"><button class="btn ok on" data-rsvp>Je viens</button><button class="btn no" data-rsvp>Non</button></div>
+          <div class="muted" style="margin-top:6px">3 oui · 1 non · 1 sans réponse</div></div>
+      </div>
+      <div class="ev">
+        <div class="date-badge"><b>29</b><small>jeu</small></div>
+        <div class="grow"><h3>Soirée jeux de société</h3><div class="ev-meta">20h30 · par Léa</div>
+          <div class="row wrap"><button class="btn ok" data-rsvp>Je viens</button><button class="btn no" data-rsvp>Non</button></div></div>
+      </div>
+      <div class="ev">
+        <div class="date-badge"><b>30</b><small>ven</small></div>
+        <div class="grow"><h3>Max dort à la maison</h3><div class="ev-meta">Invité de Hugo · 1 nuit</div><span class="chip grey">Information</span></div>
+      </div>
+      <div class="ev">
+        <div class="date-badge"><b>31</b><small>sam</small></div>
+        <div class="grow"><h3>Soirée Halloween 🎃</h3><div class="ev-meta">21h · par Inès · ~20 personnes</div>
+          <div class="row wrap"><button class="btn ok" data-rsvp>Je viens</button><button class="btn no on" data-rsvp>Non</button></div>
+          <div class="muted" style="margin-top:6px">⚠ Bruit possible jusqu'à 2h</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TÂCHES ============ -->
+<section class="view" id="v-menus">
+  <h1>Menus de la semaine</h1>
+  <p class="sub">Dîners du 26 octobre au 1er novembre · le nombre = personnes présentes</p>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>Cette semaine</h2>
+      <div class="meal"><div class="date-badge"><b>26</b><small>Lun</small></div>
+        <div class="grow"><h3>Pâtes pesto</h3><div class="muted">Cuisine : <span class="av sm c-tom">T</span> Tom</div></div>
+        <span class="chip ok">4 🍽</span></div>
+      <div class="meal"><div class="date-badge"><b>27</b><small>Mar</small></div>
+        <div class="grow"><h3>Raclette</h3><div class="muted">Cuisine : <span class="av sm c-tom">T</span> Tom</div></div>
+        <span class="chip ok">4 🍽</span></div>
+      <div class="meal"><div class="date-badge"><b>28</b><small>Mer</small></div>
+        <div class="grow"><h3>Curry de pois chiches</h3><div class="muted">Cuisine : <span class="av sm c-lea">L</span> Léa</div></div>
+        <span class="chip ok">5 🍽</span></div>
+      <div class="meal"><div class="date-badge"><b>29</b><small>Jeu</small></div>
+        <div class="grow"><h3>Soirée jeux : pizzas maison</h3><div class="muted">Cuisine : <span class="av sm c-lea">L</span> Léa</div></div>
+        <span class="chip ok">5 🍽</span></div>
+      <div class="meal"><div class="date-badge"><b>30</b><small>Ven</small></div>
+        <div class="grow"><h3>Tacos</h3><div class="muted">Cuisine : <span class="av sm c-hugo">H</span> Hugo</div></div>
+        <span class="chip ok">4 🍽</span></div>
+      <div class="meal"><div class="date-badge"><b>31</b><small>Sam</small></div>
+        <div class="grow"><h3>Buffet Halloween 🎃</h3><div class="muted">Cuisine : <span class="av sm c-ines">I</span> Inès</div></div>
+        <span class="chip ok">5 🍽</span></div>
+      <div class="meal"><div class="date-badge"><b>1</b><small>Dim</small></div>
+        <div class="grow"><h3>Restes / chacun pour soi</h3><div class="muted">Cuisine : <span class="muted">Personne</span></div></div>
+        <span class="chip ok">3 🍽</span></div>
+    </div>
+
+    <div class="card">
+      <h2>Proposer un menu</h2>
+      <div class="field"><select><option>Mardi 27</option><option>Mercredi 28</option><option>Jeudi 29</option></select></div>
+      <div class="add-row" style="margin-top:10px"><input placeholder="Plat prévu…"><button class="btn primary">Ajouter</button></div>
+      <p class="muted">Le cuisinier s'inscrit sur un soir, les autres indiquent s'ils mangent.</p>
+      <h2 style="margin-top:20px">Je mange ce soir ?</h2>
+      <div class="row"><button class="btn ok on" data-rsvp>Oui</button><button class="btn no" data-rsvp>Non</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURSES ============ -->
+<section class="view" id="v-courses">
+  <h1>Liste de courses</h1>
+  <p class="sub">Tout le monde peut ajouter ce qu'il manque</p>
+
+  <div class="card">
+    <div class="add-row">
+      <input placeholder="Ajouter un article…">
+      <button class="btn primary">Ajouter</button>
+    </div>
+
+    <div class="cat">Frais</div>
+    <div class="item"><button class="check"></button><div class="grow"><span class="label">Lait</span></div><span class="av sm c-lea">L</span></div>
+    <div class="item"><button class="check"></button><div class="grow"><span class="label">Fromage à raclette</span> <span class="chip grey">x2</span></div><span class="av sm c-tom">T</span></div>
+
+    <div class="cat">Épicerie</div>
+    <div class="item"><button class="check"></button><div class="grow"><span class="label">Pâtes</span></div><span class="av sm c-flav">F</span></div>
+    <div class="item"><button class="check on">✓</button><div class="grow"><span class="label done-text">Riz</span></div><span class="av sm c-hugo">H</span></div>
+
+    <div class="cat">Maison</div>
+    <div class="item"><button class="check"></button><div class="grow"><span class="label">Papier toilette</span></div><span class="av sm c-hugo">H</span></div>
+    <div class="item"><button class="check"></button><div class="grow"><span class="label">Liquide vaisselle</span></div><span class="av sm c-ines">I</span></div>
+    <div class="item"><button class="check"></button><div class="grow"><span class="label">Sacs poubelle</span></div><span class="av sm c-ines">I</span></div>
+
+    <div class="row between" style="margin-top:16px">
+      <span class="muted">1 article coché</span>
+      <button class="btn">Vider les articles cochés</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IDÉES ============ -->
+<section class="view" id="v-idees">
+  <h1>Idées & activités</h1>
+  <p class="sub">Propose, les autres votent</p>
+
+  <div class="card">
+    <div class="add-row">
+      <input placeholder="Une idée de soirée, sortie, projet…">
+      <select><option>Soirée</option><option>Sortie</option><option>Autre</option></select>
+      <button class="btn primary">Proposer</button>
+    </div>
+    <div class="idea"><button class="vote on"><b>4</b><small>votes</small></button><div class="grow"><b>Weekend raclette</b><div class="muted">Tom · tous les 5 intéressés ?</div></div><span class="chip">Soirée</span></div>
+    <div class="idea"><button class="vote"><b>3</b><small>votes</small></button><div class="grow"><b>Soirée ciné projecteur</b><div class="muted">Léa</div></div><span class="chip">Soirée</span></div>
+    <div class="idea"><button class="vote"><b>2</b><small>votes</small></button><div class="grow"><b>Escape game en équipe</b><div class="muted">Hugo</div></div><span class="chip grey">Sortie</span></div>
+    <div class="idea"><button class="vote"><b>1</b><small>vote</small></button><div class="grow"><b>Pendaison de crémaillère d'hiver</b><div class="muted">Inès</div></div><span class="chip">Soirée</span></div>
+  </div>
+</section>
+
+</main>
+
+<button class="fab" id="fab" data-open aria-label="Ajouter un évènement">＋</button>
+
+<nav class="tabs">
+  <a href="#home" data-v="home"><span class="ico">🏠</span>Accueil</a>
+  <a href="#menus" data-v="menus"><span class="ico">🍽</span>Menus</a>
+  <a href="#courses" data-v="courses"><span class="ico">🛒</span>Courses</a>
+  <a href="#idees" data-v="idees"><span class="ico">💡</span>Idées</a>
+</nav>
+
+<!-- Ajout d'évènement -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h2>Nouvel évènement</h2>
+    <div class="type-pick">
+      <button class="btn sel">🎉 Soirée</button>
+      <button class="btn">🍽 Dîner</button>
+      <button class="btn">🧳 Invité</button>
+      <button class="btn">🚪 Absence</button>
+      <button class="btn">📝 Autre</button>
+    </div>
+    <label class="field">Titre<input placeholder="Ex : Soirée jeux, Max dort à la maison…"></label>
+    <div class="row" style="gap:8px">
+      <label class="field grow">Date<input type="date" value="2026-10-29"></label>
+      <label class="field grow">Heure<input type="time" value="20:30"></label>
+    </div>
+    <label class="field">Détail pour les autres (bruit, nombre d'invités…)<input placeholder="Optionnel"></label>
+    <div class="row between" style="margin-top:18px">
+      <button class="btn" data-close>Annuler</button>
+      <button class="btn primary" data-close>Publier</button>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="mockup.js"></script>
+</body>
+</html>
