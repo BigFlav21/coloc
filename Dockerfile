@@ -14,7 +14,7 @@ USER coloc
 ENV COLOC_DATABASE_URL=sqlite:////data/coloc.db
 EXPOSE 8000
 
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"
 
 # Le port n'est publié que sur 127.0.0.1 côté hôte (voir docker-compose.yml) :

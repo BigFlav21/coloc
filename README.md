@@ -52,7 +52,7 @@ Variables d'environnement (voir `.env.example`) :
 
 ## Déploiement avec Docker
 
-Le projet compose `coloc` est autonome : conteneur `coloc-app`, réseau `coloc_net`, volume `coloc_data`, mémoire et CPU limités, logs bornés. Le port n'est publié que sur `127.0.0.1`, à placer derrière un reverse proxy HTTPS.
+Le projet compose `coloc` est autonome : conteneur `coloc-app`, réseau `coloc_net`, mémoire et CPU limités, logs bornés. La base SQLite est dans `./data/coloc.db` : pour la sauvegarder, il suffit de copier ce fichier. Le port n'est publié que sur `127.0.0.1`, à placer derrière un reverse proxy HTTPS.
 
 ```bash
 cp .env.example .env        # puis renseigner COLOC_SECRET_KEY

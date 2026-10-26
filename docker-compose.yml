@@ -1,4 +1,4 @@
-# Tout est préfixé "coloc" et isolé : réseau, volume, conteneur et port dédiés.
+# Tout est préfixé "coloc" et isolé : réseau, dossier de données, conteneur et port dédiés.
 # Ne touche à rien d'autre sur la machine.
 name: coloc
 
@@ -14,8 +14,12 @@ services:
     # Uniquement en loopback : le reverse proxy (ou rien du tout) décide de l'exposition.
     ports:
       - "127.0.0.1:${COLOC_PORT:-8321}:8000"
+    # Données (SQLite) dans ./data du projet : sauvegarde = copier coloc.db.
+    # Le conteneur tourne avec l'uid de l'utilisateur pour pouvoir y écrire
+    # (COLOC_UID/COLOC_GID sont exportés par scripts/_common.sh).
+    user: "${COLOC_UID:-1000}:${COLOC_GID:-1000}"
     volumes:
-      - coloc_data:/data
+      - ./data:/data
     networks:
       - coloc_net
     # Limites pour ne jamais gêner les autres projets du serveur.
@@ -34,10 +38,6 @@ services:
       options:
         max-size: "5m"
         max-file: "3"
-
-volumes:
-  coloc_data:
-    name: coloc_data
 
 networks:
   coloc_net:
