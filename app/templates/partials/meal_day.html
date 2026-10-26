@@ -1,0 +1,20 @@
+{% from "macros.html" import av %}
+<div class="meal{{ ' empty-day' if not m }}" id="day-{{ day.isoformat() }}">
+  <div class="date-badge"><b>{{ day.day }}</b><small>{{ day|dow }}</small></div>
+  {% if m %}
+  <div class="grow">
+    <h3>{{ m.meal.dish }}</h3>
+    <div class="muted">Cuisine : {% if m.cook %}{{ av(m.cook, 'sm') }} {{ m.cook.name }}{% else %}personne{% endif %}</div>
+    <div class="ev-actions" style="margin-top:6px">
+      <button class="btn ok sm {{ 'on' if m.mine == 'yes' }}" hx-post="/menus/{{ m.meal.id }}/presence" hx-vals='{"status":"yes"}' hx-target="#day-{{ day.isoformat() }}" hx-swap="outerHTML">Je mange</button>
+      <button class="btn no sm {{ 'on' if m.mine == 'no' }}" hx-post="/menus/{{ m.meal.id }}/presence" hx-vals='{"status":"no"}' hx-target="#day-{{ day.isoformat() }}" hx-swap="outerHTML">Absent</button>
+    </div>
+  </div>
+  <span class="chip ok">{{ m.yes }} 🍽</span>
+  {% if m.is_cook %}
+  <button class="x" title="Supprimer" hx-post="/menus/{{ m.meal.id }}/delete" hx-confirm="Supprimer ce menu ?" hx-target="#day-{{ day.isoformat() }}" hx-swap="outerHTML">×</button>
+  {% endif %}
+  {% else %}
+  <div class="grow"><div class="muted">Personne n'a encore proposé de menu</div></div>
+  {% endif %}
+</div>

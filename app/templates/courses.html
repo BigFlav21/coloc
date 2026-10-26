@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% set active = 'courses' %}
+{% block title %}Courses · Coloc{% endblock %}
+{% block content %}
+<section class="view active">
+  <h1>Liste de courses</h1>
+  <p class="sub">Tout le monde peut ajouter ce qu'il manque</p>
+
+  <div class="card">
+    <form class="add-row" method="post" action="/courses">
+      <input name="name" maxlength="60" placeholder="Ajouter un article…" required>
+      <select name="category">{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select>
+      <button class="btn primary">Ajouter</button>
+    </form>
+
+    {% for category, items in groups %}
+    <div class="cat">{{ category }}</div>
+    {% for i in items %}{% include "partials/item.html" %}{% endfor %}
+    {% else %}
+    <p class="muted">La liste est vide.</p>
+    {% endfor %}
+
+    {% if checked %}
+    <form class="row between" method="post" action="/courses/clear" style="margin-top:16px">
+      <span class="muted">{{ checked }} article{{ 's' if checked > 1 }} coché{{ 's' if checked > 1 }}</span>
+      <button class="btn">Vider les articles cochés</button>
+    </form>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

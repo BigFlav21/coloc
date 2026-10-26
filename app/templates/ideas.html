@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% set active = 'idees' %}
+{% block title %}Idées · Coloc{% endblock %}
+{% block content %}
+<section class="view active">
+  <h1>Idées &amp; activités</h1>
+  <p class="sub">Propose, les autres votent</p>
+
+  <div class="card">
+    <form class="add-row" method="post" action="/idees">
+      <input name="title" maxlength="100" placeholder="Une idée de soirée, sortie, projet…" required>
+      <select name="category">{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select>
+      <button class="btn primary">Proposer</button>
+    </form>
+    {% for v in ideas %}{% include "partials/idea.html" %}
+    {% else %}<p class="muted">Aucune idée pour l'instant.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

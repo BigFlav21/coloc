@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% set active = 'menus' %}
+{% block title %}Menus · Coloc{% endblock %}
+{% block content %}
+<section class="view active">
+  <h1>Menus de la semaine</h1>
+  <p class="sub">Dîners du {{ span }} · le nombre = personnes présentes</p>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>Cette semaine</h2>
+      {% for day, m in rows %}{% include "partials/meal_day.html" %}{% endfor %}
+    </div>
+
+    <div class="card">
+      <h2>Proposer un menu</h2>
+      <form method="post" action="/menus">
+        <div class="field">
+          <select name="day" required>
+            {% for value, label in options %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="add-row" style="margin-top:10px">
+          <input name="dish" maxlength="80" placeholder="Plat prévu…" required>
+          <button class="btn primary">Ajouter</button>
+        </div>
+      </form>
+      {% if error %}<p class="err">{{ error }}</p>{% endif %}
+      <p class="muted">Tu cuisines le soir choisi, les autres indiquent s'ils mangent.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

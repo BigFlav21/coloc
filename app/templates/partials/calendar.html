@@ -1,0 +1,22 @@
+<div class="card" id="cal-card">
+  <div class="cal-head">
+    <button class="btn" hx-get="/calendar?m={{ calendar.prev }}" hx-target="#cal-card" hx-swap="outerHTML" aria-label="Mois précédent">←</button>
+    <h2>{{ calendar.first|month_year }}</h2>
+    <button class="btn" hx-get="/calendar?m={{ calendar.next }}" hx-target="#cal-card" hx-swap="outerHTML" aria-label="Mois suivant">→</button>
+  </div>
+  <div class="cal-grid">
+    {% for d in ["L", "M", "M", "J", "V", "S", "D"] %}<div class="cal-dow">{{ d }}</div>{% endfor %}
+    {% for week in calendar.weeks %}{% for c in week %}
+    <div class="cal-day{{ ' off' if c.off }}{{ ' today' if c.today }}">
+      <span class="n">{{ c.day.day }}</span>
+      {% for dot in c.dots %}<div class="dot {{ dot }}"></div>{% endfor %}
+    </div>
+    {% endfor %}{% endfor %}
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--c-ines)"></i>Soirée</span>
+    <span><i style="background:var(--ok)"></i>Dîner</span>
+    <span><i style="background:var(--c-hugo)"></i>Invité</span>
+    <span><i style="background:var(--muted)"></i>Absence</span>
+  </div>
+</div>

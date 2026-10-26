@@ -1,0 +1,10 @@
+{% from "macros.html" import av %}
+<div class="item" id="item-{{ i.id }}">
+  <button class="check {{ 'on' if i.checked }}" aria-label="Cocher" hx-post="/courses/{{ i.id }}/toggle" hx-target="#item-{{ i.id }}" hx-swap="outerHTML">{{ '✓' if i.checked }}</button>
+  <div class="grow">
+    <span class="label {{ 'done-text' if i.checked }}">{{ i.name }}</span>
+    {% if i.qty %}<span class="chip grey">{{ i.qty }}</span>{% endif %}
+  </div>
+  {{ av(users.get(i.added_by), 'sm') }}
+  <button class="x" title="Supprimer" hx-post="/courses/{{ i.id }}/delete" hx-target="#item-{{ i.id }}" hx-swap="outerHTML">×</button>
+</div>

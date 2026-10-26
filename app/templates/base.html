@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#d9622b">
+<title>{% block title %}Coloc{% endblock %}</title>
+<link rel="manifest" href="/static/manifest.webmanifest">
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/styles.css">
+<script src="/static/htmx.min.js" defer></script>
+<script src="/static/app.js" defer></script>
+</head>
+<body class="{{ 'bare' if bare }}">
+<div class="app">
+{% if user and not bare %}
+<header class="top">
+  <div class="brand">la<span>coloc</span></div>
+  <div class="me">
+    <a class="link" href="/pin">Mon PIN</a>
+    <form method="post" action="/logout" class="inline"><button class="link">Déconnexion</button></form>
+    <span class="av" style="background:{{ user.color }}">{{ user.initial }}</span>
+  </div>
+</header>
+{% endif %}
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+{% block fab %}{% endblock %}
+
+{% if user and not bare %}
+<nav class="tabs">
+  <a href="/" class="{{ 'active' if active == 'home' }}"><span class="ico">🏠</span>Accueil</a>
+  <a href="/menus" class="{{ 'active' if active == 'menus' }}"><span class="ico">🍽</span>Menus</a>
+  <a href="/courses" class="{{ 'active' if active == 'courses' }}"><span class="ico">🛒</span>Courses</a>
+  <a href="/idees" class="{{ 'active' if active == 'idees' }}"><span class="ico">💡</span>Idées</a>
+</nav>
+{% endif %}
+</div>
+</body>
+</html>

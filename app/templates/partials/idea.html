@@ -1,0 +1,8 @@
+<div class="idea" id="idea-{{ v.idea.id }}">
+  <button class="vote {{ 'on' if v.voted }}" aria-label="Voter" hx-post="/idees/{{ v.idea.id }}/vote" hx-target="#idea-{{ v.idea.id }}" hx-swap="outerHTML"><b>{{ v.votes }}</b><small>vote{{ 's' if v.votes > 1 }}</small></button>
+  <div class="grow"><b>{{ v.idea.title }}</b><div class="muted">{{ v.author.name if v.author else '?' }}</div></div>
+  <span class="chip {{ '' if v.idea.category == 'Soirée' else 'grey' }}">{{ v.idea.category }}</span>
+  {% if v.is_author %}
+  <button class="x" title="Supprimer" hx-post="/idees/{{ v.idea.id }}/delete" hx-confirm="Supprimer cette idée ?" hx-target="#idea-{{ v.idea.id }}" hx-swap="outerHTML">×</button>
+  {% endif %}
+</div>

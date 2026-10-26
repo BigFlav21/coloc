@@ -1,0 +1,9 @@
+{
+  "name": "Coloc",
+  "short_name": "Coloc",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf6f0",
+  "theme_color": "#d9622b",
+  "icons": [{ "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

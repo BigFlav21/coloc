@@ -1,0 +1,22 @@
+{% from "macros.html" import av %}
+<div class="ev" id="ev-{{ v.ev.id }}">
+  <div class="date-badge"><b>{{ v.ev.day.day }}</b><small>{{ v.ev.day|dow }}</small></div>
+  <div class="grow">
+    <h3>{{ v.kind.icon }} {{ v.ev.title }}</h3>
+    <div class="ev-meta">{% if v.ev.start %}{{ v.ev.start|hm }} · {% endif %}par {{ v.author.name if v.author else '?' }}</div>
+    {% if v.ev.details %}<div class="ev-meta">{{ v.ev.details }}</div>{% endif %}
+    {% if v.kind.rsvp %}
+    <div class="ev-actions">
+      <button class="btn ok sm {{ 'on' if v.mine == 'yes' }}" hx-post="/events/{{ v.ev.id }}/rsvp" hx-vals='{"status":"yes"}' hx-target="#ev-{{ v.ev.id }}" hx-swap="outerHTML">Je viens</button>
+      <button class="btn no sm {{ 'on' if v.mine == 'no' }}" hx-post="/events/{{ v.ev.id }}/rsvp" hx-vals='{"status":"no"}' hx-target="#ev-{{ v.ev.id }}" hx-swap="outerHTML">Non</button>
+      <span class="muted">{{ v.yes|length }} oui · {{ v.no|length }} non</span>
+    </div>
+    {% else %}
+    <span class="chip grey">{{ v.kind.label }}</span>
+    {% endif %}
+  </div>
+  {% if v.yes %}<div class="stack">{% for u in v.yes[:4] %}{{ av(u, 'sm') }}{% endfor %}</div>{% endif %}
+  {% if v.is_author %}
+  <button class="x" title="Supprimer" hx-post="/events/{{ v.ev.id }}/delete" hx-confirm="Supprimer cet évènement ?" hx-target="#ev-{{ v.ev.id }}" hx-swap="outerHTML">×</button>
+  {% endif %}
+</div>

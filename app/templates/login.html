@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "macros.html" import av %}
+{% block title %}Connexion · Coloc{% endblock %}
+{% block content %}
+<section class="view active">
+  <form class="auth" method="post" action="/login">
+    <div class="brand" style="font-size:28px;text-align:center">la<span>coloc</span></div>
+    <p class="sub" style="text-align:center;margin-top:6px">Qui es-tu ?</p>
+    {% if not users %}
+    <p class="err">Aucun colocataire. Crée-les avec <code>python -m app.seed add Prénom</code>.</p>
+    {% endif %}
+    <div class="who">
+      {% for u in users %}
+      <label class="who-btn">
+        <input type="radio" name="user_id" value="{{ u.id }}" required {{ 'checked' if selected == u.id }}>
+        {{ av(u, 'lg') }}{{ u.name }}
+      </label>
+      {% endfor %}
+    </div>
+    <label class="field">Ton PIN
+      <input type="password" name="pin" inputmode="numeric" pattern="[0-9]*" placeholder="••••" maxlength="6" autocomplete="current-password" required>
+    </label>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+    <p class="muted" style="margin-top:8px">Trop d'erreurs : accès bloqué 15 minutes.</p>
+    <button class="btn primary block">Se connecter</button>
+  </form>
+</section>
+{% endblock %}

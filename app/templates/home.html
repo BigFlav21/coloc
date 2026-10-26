@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% set active = 'home' %}
+{% block title %}Accueil · Coloc{% endblock %}
+{% block content %}
+<section class="view active">
+  <h1>Salut {{ user.name }} 👋</h1>
+  <p class="sub">Tout ce que les autres doivent savoir · {{ DAYS[today.weekday()] }} {{ today.day }} {{ MONTHS[today.month - 1] }}</p>
+
+  <div class="grid">
+    {% include "partials/calendar.html" %}
+
+    <div class="card">
+      <h2>Évènements à venir</h2>
+      {% for v in events %}{% include "partials/event.html" %}
+      {% else %}<p class="muted">Rien de prévu pour l'instant. Ajoute le premier avec le bouton ＋.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block fab %}
+<button class="fab" data-open aria-label="Ajouter un évènement">＋</button>
+
+<div class="modal-bg" id="modal">
+  <form class="modal" method="post" action="/events">
+    <h2>Nouvel évènement</h2>
+    <input type="hidden" name="type" id="ev-type" value="soiree">
+    <div class="type-pick">
+      {% for key, t in types.items() %}
+      <button type="button" class="btn {{ 'sel' if loop.first }}" data-type="{{ key }}">{{ t.icon }} {{ t.label }}</button>
+      {% endfor %}
+    </div>
+    <label class="field">Titre
+      <input name="title" maxlength="80" required placeholder="Ex : Soirée jeux, Max dort à la maison…">
+    </label>
+    <div class="row" style="gap:8px">
+      <label class="field grow">Date<input type="date" name="day" value="{{ today.isoformat() }}" required></label>
+      <label class="field grow">Heure<input type="time" name="start"></label>
+    </div>
+    <label class="field">Détail pour les autres (bruit, nombre d'invités…)
+      <input name="details" maxlength="200" placeholder="Optionnel">
+    </label>
+    <div class="row between" style="margin-top:18px">
+      <button type="button" class="btn" data-close>Annuler</button>
+      <button class="btn primary">Publier</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

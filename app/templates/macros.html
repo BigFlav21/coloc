@@ -1,0 +1,7 @@
+{% macro av(u, size='') -%}
+{%- if u -%}
+<span class="av {{ size }}" style="background:{{ u.color }}" title="{{ u.name }}">{{ u.initial }}</span>
+{%- else -%}
+<span class="av {{ size }}" style="background:var(--muted)">?</span>
+{%- endif -%}
+{%- endmacro %}

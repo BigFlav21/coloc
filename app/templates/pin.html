@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Choisis ton PIN' if first else 'Changer mon PIN' }} · Coloc{% endblock %}
+{% block content %}
+<section class="view active">
+  <form class="auth" method="post" action="/pin">
+    {% if first %}
+    <h1 style="text-align:center">Choisis ton PIN 🔐</h1>
+    <p class="sub" style="text-align:center">C'est ta première connexion : remplace le PIN temporaire par le tien (4 à 6 chiffres).</p>
+    {% else %}
+    <h1 style="text-align:center">Changer mon PIN</h1>
+    <p class="sub" style="text-align:center">4 à 6 chiffres.</p>
+    {% endif %}
+    <label class="field">{{ 'PIN temporaire' if first else 'PIN actuel' }}
+      <input type="password" name="current" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••" autocomplete="current-password" required>
+    </label>
+    <label class="field">Nouveau PIN
+      <input type="password" name="new" inputmode="numeric" pattern="[0-9]{4,6}" maxlength="6" placeholder="••••" autocomplete="new-password" required>
+    </label>
+    <label class="field">Confirmer le nouveau PIN
+      <input type="password" name="confirm" inputmode="numeric" pattern="[0-9]{4,6}" maxlength="6" placeholder="••••" autocomplete="new-password" required>
+    </label>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+    <button class="btn primary block">Valider</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+[project]
+name = "coloc"
+version = "0.1.0"
+description = "Gestion de colocation : agenda commun, menus, courses, idées"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
