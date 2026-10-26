@@ -1,0 +1,44 @@
+# Tout est préfixé "coloc" et isolé : réseau, volume, conteneur et port dédiés.
+# Ne touche à rien d'autre sur la machine.
+name: coloc
+
+services:
+  app:
+    build: .
+    image: coloc:local
+    container_name: coloc-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TZ: Europe/Paris
+    # Uniquement en loopback : le reverse proxy (ou rien du tout) décide de l'exposition.
+    ports:
+      - "127.0.0.1:${COLOC_PORT:-8321}:8000"
+    volumes:
+      - coloc_data:/data
+    networks:
+      - coloc_net
+    # Limites pour ne jamais gêner les autres projets du serveur.
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 128
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
+
+volumes:
+  coloc_data:
+    name: coloc_data
+
+networks:
+  coloc_net:
+    name: coloc_net
